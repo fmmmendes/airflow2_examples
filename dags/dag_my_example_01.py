@@ -11,17 +11,10 @@ from functools import partial
 
 from pandas import DataFrame
 from airflow import models
-# from airflow.contrib.operators.gcs_delete_operator import GoogleCloudStorageDeleteOperator
 # from airflow.exceptions import AirflowSensorTimeout
 # from airflow.models import Variable
 # from airflow.operators.bash_operator import BashOperator
 from airflow.operators.python_operator import PythonOperator
-# from airflow.providers.google.cloud.operators.dataflow import DataflowStartFlexTemplateOperator
-# from airflow.providers.google.cloud.sensors.gcs import GCSObjectExistenceSensor
-# from airflow.providers.google.cloud.transfers.gcs_to_gcs import GCSToGCSOperator
-# from airflow.providers.google.cloud.transfers.gcs_to_sftp import GCSToSFTPOperator
-from google.cloud import storage
-import google.cloud.aiplatform as aip
 from airflow.macros import ds_format
 
 
