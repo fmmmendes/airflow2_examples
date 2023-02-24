@@ -29,32 +29,60 @@ import pendulum
 
 from airflow import DAG
 from airflow.decorators import task
+from airflow.operators.python_operator import PythonOperator
 
 log = logging.getLogger(__name__)
+
+def print_context_old(**kwargs):
+    
+    pprint(kwargs)
+    
+    ds = kwargs['ds']
+    print(f'This is dag run date {ds}')
+    
+    ti = kwargs['ti']
+    sd = ti.start_date
+    type(sd)
+    print(f'This is start_date {sd}')
+    
 
 with DAG(
     dag_id='dag_context',
     schedule_interval="0 5 * * *",
-    start_date=pendulum.datetime(2022, 11, 10, tz="UTC"),
+    start_date=pendulum.datetime(2023, 2, 10, tz="UTC"),
     catchup=True,
     tags=['my_example'],
 ) as dag:
     
+    ## Old Way to create tasks
+    
+    t_print_context_old = PythonOperator(
+        task_id="print_context_old",
+        python_callable=print_context_old,
+        # op_kwargs=
+        # {   
 
-    @task(task_id="print_context",provide_context=True)
-    def print_context(ds=None, **kwargs):
+        # },
+        retries=2,
+        dag=dag
+    )
+    
+    ## New Way to create tasks
+
+    @task(task_id="print_context_new",
+          provide_context=True)
+    def print_context_new(ds=None, **kwargs):
         """Print the Airflow context and ds variable from the context."""
         pprint(kwargs)
         print(ds)
         ti = kwargs['ti']
         
         sd = ti.start_date
+        type(sd)
+        print(f'This is start_date {sd}')
         
-        return print(f'This is start_date {sd}')
 
-    run_this = print_context()
+    t_print_context_new = print_context_new()
     
+    t_print_context_old >> t_print_context_new
     
-    run_this 
-
-
