@@ -24,6 +24,7 @@ import logging
 import shutil
 import time
 from pprint import pprint
+from datetime import (datetime, timedelta, date)
 
 import pendulum
 
@@ -42,16 +43,28 @@ def print_context_old(**kwargs):
     
     ti = kwargs['ti']
     sd = ti.start_date
-    type(sd)
+
     print(f'This is start_date {sd}')
+    print(type(sd)) # original task instance start date as datetime data type
+    
+    #from python operator arguments
+    task_inst_start_date = kwargs['task_inst_start_date']
+    print("task_inst_start_date: " + str(task_inst_start_date))
+    print(type(task_inst_start_date)) # this one is the same as "sd" but it comes as a string data type
+    
+    
+default_args = {
+    'retries': 1,
+    'retry_delay': timedelta(seconds=10)
+}
     
 
 with DAG(
     dag_id='dag_context',
     schedule_interval="0 5 * * *",
     start_date=pendulum.datetime(2023, 2, 10, tz="UTC"),
-    catchup=True,
-    tags=['my_example'],
+    catchup=False,
+    tags=['aiflow2_examples'],
 ) as dag:
     
     ## Old Way to create tasks
@@ -59,10 +72,11 @@ with DAG(
     t_print_context_old = PythonOperator(
         task_id="print_context_old",
         python_callable=print_context_old,
-        # op_kwargs=
-        # {   
+        op_kwargs=
+        {   
+            "task_inst_start_date":"{{ti.start_date}}"
 
-        # },
+        },
         retries=2,
         dag=dag
     )
@@ -78,9 +92,9 @@ with DAG(
         ti = kwargs['ti']
         
         sd = ti.start_date
-        type(sd)
+
         print(f'This is start_date {sd}')
-        
+        print(type(sd))
 
     t_print_context_new = print_context_new()
     

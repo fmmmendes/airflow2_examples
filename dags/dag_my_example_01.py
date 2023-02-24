@@ -48,13 +48,17 @@ def generate_aux_data(**kwargs):
     
     return True
 
+default_args = {
+    'retries': 1,
+    'retry_delay': timedelta(seconds=10)
+}
 
 with models.DAG(
     "dag_my_example_01",
     schedule_interval='0 5 * * *',
     start_date=pendulum.datetime(2022,11, 20, tz="UTC"),
     catchup=False,
-    tags=['my_example']
+    tags=['aiflow2_examples']
 ) as dag:
 
     

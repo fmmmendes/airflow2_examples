@@ -1,4 +1,3 @@
-from email.mime import base
 import json
 import logging
 import os
@@ -35,7 +34,7 @@ with models.DAG(
     start_date=pendulum.datetime(2022,11, 20, tz="UTC"),
     catchup=False,
     default_args = default_args,
-    tags=['my_example']
+    tags=['aiflow2_examples']
 ) as dag:
 
     
