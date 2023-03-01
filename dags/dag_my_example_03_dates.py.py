@@ -34,12 +34,15 @@ from airflow.operators.python_operator import PythonOperator
 
 log = logging.getLogger(__name__)
 
-## About templates
+## Some References about Templates
 # https://airflow.apache.org/docs/apache-airflow/stable/templates-ref.html
 # https://docs.astronomer.io/learn/templating
 # https://stackoverflow.com/questions/44513308/macros-in-the-airflow-python-operator
 # https://diogoalexandrefranco.github.io/about-airflow-date-macros-ds-and-execution-date/
 
+# Notes
+
+# The "ds" var is the same as "data_interval_start" but in a different format
 
 # Formats
 ds_template = "{{ ds }}" # 2023-02-28
