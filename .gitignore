@@ -1,3 +1,2 @@
-logs
-plugins
 *pyc
+*.log
