@@ -60,10 +60,11 @@ default_args = {
     
 
 with DAG(
-    dag_id='dag_context',
+    dag_id='dag_my_example_01_context',
     schedule_interval="0 5 * * *",
-    start_date=pendulum.datetime(2023, 2, 10, tz="UTC"),
-    catchup=False,
+    start_date=pendulum.datetime(2023, 1, 1, tz="UTC"),
+    end_date=pendulum.datetime(2023, 1, 15, tz="UTC"),
+    catchup=True,
     tags=['aiflow2_examples'],
 ) as dag:
     
