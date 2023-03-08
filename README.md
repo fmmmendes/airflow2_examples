@@ -40,7 +40,7 @@ Any changes on config file, it will require a restart of the webserver container
 
 ## References
 
-https://airflow.apache.org/docs/apache-airflow/stable/templates-ref.html
-https://pendulum.eustace.io/docs/#introduction
-https://airflow.apache.org/docs/apache-airflow/stable/howto/customize-ui.html
+https://airflow.apache.org/docs/apache-airflow/stable/templates-ref.html   
+https://pendulum.eustace.io/docs/#introduction   
+https://airflow.apache.org/docs/apache-airflow/stable/howto/customize-ui.html   
 
