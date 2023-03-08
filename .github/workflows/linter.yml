@@ -11,7 +11,7 @@ name: Lint Code Base
 #############################
 on:
   push:
-    branches-ignore: [main,dev]
+    branches: [main,dev]
 
 ###############
 # Set the Job #
