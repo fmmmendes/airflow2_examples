@@ -1,5 +1,6 @@
 # Airflow 2 Examples
 
+[![Lint Code Base](https://github.com/fmmmendes/airflow2_examples/actions/workflows/linter.yml/badge.svg?branch=main)](https://github.com/fmmmendes/airflow2_examples/actions/workflows/linter.yml)
 ## Setup
 
 The setup is based on airflow2 documentation available on this [link](https://airflow.apache.org/docs/apache-airflow/2.3.2/start/docker.html) with more details.
