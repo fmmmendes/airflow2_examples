@@ -34,10 +34,17 @@ docker-compose down
 docker-compose down --volumes --rmi all
 ```
 
-## Condig
+## Config
 
 Any changes on config file, it will require a restart of the webserver container
 
+## Import Variables
+
+TODO
+
+## Clean Logs Folder
+
+TODO
 ## References
 
 https://airflow.apache.org/docs/apache-airflow/stable/templates-ref.html   
