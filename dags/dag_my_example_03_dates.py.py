@@ -71,14 +71,22 @@ my_var_txt_and_template = 'This is DAG run date: ' +  ds_template
 
 def print_dates(**kwargs):
     
+    print('print kwargs')
     pprint(kwargs)
     
-    #from python operator arguments
-    task_inst_start_date = kwargs['task_inst_start_date']
-    print("task_inst_start_date: " + str(task_inst_start_date))
-    print(type(task_inst_start_date)) # this one is the same as "sd" but it comes as a string data type
+    # print('print vars')
+    # #from python operator arguments
+    # task_inst_start_date = kwargs['task_inst_start_date']
+    # print("task_inst_start_date: " + str(task_inst_start_date))
+    # print(type(task_inst_start_date)) # this one is the same as "sd" but it comes as a string data type
     
-    print(kwargs['my_var_txt_and_template'])
+    # print(kwargs['my_var_txt_and_template'])
+    
+    # ti = kwargs['ti']
+    
+    # print(ti['start_date'])
+    # print(ti['end_date'])
+    # print(ti['duration'])
     
     
 default_args = {
@@ -119,11 +127,14 @@ with DAG(
             "data_interval_start_add1_ds_nodash_template":data_interval_start_add1_ds_nodash_template,
             "data_interval_end_rem1_ds_nodash_template":data_interval_end_rem1_ds_nodash_template,
             "task_inst_start_date":"{{ti.start_date}}",
+            "task_inst_end_date":"{{ti.end_date}}",
+            "task_inst_duration":"{{ti.duration}}",
+            "end_date":"{{ts.end_date}}",
             "my_var_txt_and_template":my_var_txt_and_template
 
         },
         retries=2,
-        #provide_context=True, #
+        provide_context=True, #
         dag=dag
     )
     
