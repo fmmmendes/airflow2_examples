@@ -32,6 +32,7 @@ from airflow import DAG
 from airflow.decorators import task
 from airflow.operators.python_operator import PythonOperator
 from airflow.operators.trigger_dagrun import TriggerDagRunOperator
+from airflow.macros import datetime as macros_datetime
 
 log = logging.getLogger(__name__)
 
@@ -71,7 +72,8 @@ default_args = {
 
 with DAG(
     dag_id='dag_my_example_07_trigger_dag_08',
-    schedule_interval=None,
+    #schedule_interval=None,
+    schedule_interval="@daily",
     start_date=pendulum.datetime(2023, 1, 1, tz="UTC"),
     catchup=False,
     tags=['aiflow2_examples','trigger_dag'],
@@ -95,7 +97,9 @@ with DAG(
         trigger_dag_id  = 'dag_my_example_08_triggered_by_dag_07',
         #conf={'execution_date': "{{ data_interval_end | ds }}"}
         #conf={'execution_date': "{{ data_interval_end }}"},
-        execution_date="{{ data_interval_end + macros.timedelta(minutes=5) }}"
+        #execution_date="{{ data_interval_end + macros.timedelta(minutes=5) }}" # does not work when re-run a task
+        execution_date="{{ macros.datetime.now() + macros.timedelta(minutes=5) }}" # does not work when re-run a task
+        #execution_date="{{ ti.end_date + macros.timedelta(minutes=5) }}"
     )
 
     
