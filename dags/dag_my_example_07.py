@@ -98,7 +98,7 @@ with DAG(
         #conf={'execution_date': "{{ data_interval_end | ds }}"}
         #conf={'execution_date': "{{ data_interval_end }}"},
         #execution_date="{{ data_interval_end + macros.timedelta(minutes=5) }}" # does not work when re-run a task
-        execution_date="{{ macros.datetime.now() + macros.timedelta(minutes=5) }}" # does not work when re-run a task
+        execution_date="{{ macros.datetime.now() + macros.timedelta(minutes=5) }}" 
         #execution_date="{{ ti.end_date + macros.timedelta(minutes=5) }}"
     )
 

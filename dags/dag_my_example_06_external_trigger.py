@@ -51,13 +51,18 @@ def print_context(**kwargs):
     ext_trigger = kwargs['dag_run'].external_trigger
     print(f'This is external_trigger {ext_trigger}')
     
-    #ext_tgg = dr.external_trigger
-    #print(f'This is external_trigger {ext_tgg}')
-
+    # Loading from params    
+    params = kwargs['params']
+    #run_mode = params['run_mode']
+    print(f'params: + {params}')
     
+    ## alternative (jinja) way to get params
     #from python operator arguments
     var = kwargs['var']
     print("var: " + str(var))
+    
+    my_params = kwargs['my_params']
+    print("my_params: " + str(my_params))
     
     return 'OK'
     
@@ -85,6 +90,7 @@ with DAG(
         op_kwargs=
         {   
             "var":"{{dag_run.external_trigger}}",
+            "my_params":"{{dag_run.conf}}",
 
         },
         retries=2,
