@@ -9,9 +9,9 @@ The following commands are shortcuts docker deploy. The docker-compose file is n
 
 
 ```bash
-docker-compose up airflow-init
+docker compose up airflow-init
 
-docker-compose up
+docker compose up
 
 ```
 
@@ -22,16 +22,16 @@ Use the user and password: "airflow"
 To stop the containers use this command
 
 ```bash
-docker-compose stop
+docker compose stop
 
 ```
 
 To stop and remove the container use this command
 
 ```bash
-docker-compose down
+docker compose down
 # use this on instead to remove volumes
-docker-compose down --volumes --rmi all
+docker compose down --volumes --rmi all
 ```
 
 ## Config
